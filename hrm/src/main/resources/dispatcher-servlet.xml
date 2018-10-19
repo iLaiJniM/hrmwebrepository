@@ -28,4 +28,13 @@
         <property name="prefix" value="/WEB-INF/pages/"/>    <!--视图前缀(视图所在的目录文件夹)-->
         <property name="suffix" value=".jsp"/>		    <!--视图后缀（.jsp）-->
     </bean>
+
+    <!--拦截器-->
+    <mvc:interceptors>
+        <!--游客未登录时，点击功能选项跳转至登陆页面-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.lijiamin.controller.UserLoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

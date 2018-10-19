@@ -33,7 +33,7 @@
 <body>
 <div style="height: 100% ;width: 100%">
     <div style="height: 850px ; width: 500px;float: left">
-        <img src="resources/2.png">
+        <img src="resources/picture/2.png">
     </div>
 
     <div style="height: 600px;width: 400px;left: 400px;top: 100px ;position: relative ;float: left">
@@ -53,7 +53,7 @@
             %>
         </h4>
         <div style="width: 200px;height: 22px;position: relative;left: 60px">
-            <a href="toJsp?jspName=../../index">已注册，去登陆—></a>
+            <a href="toJsp?jspName=userLogin">已注册，去登陆—></a>
         </div>
     </div>
 </div>

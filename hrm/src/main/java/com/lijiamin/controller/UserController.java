@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -24,15 +26,25 @@ public class UserController {
         return jspName;
     }
 
+    @RequestMapping("/toJspInterceptor")
+    public String toJspInterceptor(String jspName){
+        return jspName;
+    }
+
     @RequestMapping("/userLogin")
-    public String userLogin(String loginUser_name, String loginUser_pass, HttpSession session, HttpServletResponse response, Model model){
+    public String userLogin(String loginUser_name, String loginUser_pass,String log, HttpSession session, HttpServletResponse response, Model model){
         User loginUser = userService.queryUser(new User(loginUser_name,loginUser_pass));
         if( loginUser != null){
             session.setAttribute("loginUser",loginUser);
-            return "userHomePage";
+            if("on".equals(log)){
+                Cookie cookie = new Cookie("loginName",loginUser.getUser_name());
+                cookie.setMaxAge(60*60*24*7);
+                response.addCookie(cookie);
+            }
+            return "../../index";
         }else {
             model.addAttribute("msg1","µÇÂ½Ê§°Ü");
-            return "../../index";
+            return "userLogin";
         }
     }
 
@@ -40,7 +52,7 @@ public class UserController {
     public String insertUser(String registerName,String registerPass,Model model) {
         if (registerName == "" || registerPass == "") {
             model.addAttribute("msg", "×¢²áÊ§°Ü");
-            return "register";
+            return "userRegister";
         }
         User user = new User(registerName, registerPass);
         if (userService.insertUser(user)) {
@@ -48,7 +60,21 @@ public class UserController {
         } else {
             model.addAttribute("msg", "×¢²áÊ§°Ü");
         }
-        return "register";
+        return "userRegister";
+    }
+
+    @RequestMapping("/autoLogin")
+    public String autoLogin(HttpSession session, HttpServletRequest request, Model model)throws Exception {
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            String name = cookie.getName();
+            String value = cookie.getValue();
+            if ("loginName".equals(name) && userService.queryUser(new User(value)) != null) {
+                User user = userService.queryUser(new User(value));
+                session.setAttribute("loginUser",user);
+            }
+        }
+        return "../../index";
     }
 
     @RequestMapping("/ajaRegisterName")
