@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lijiamin.dao.ResumeDao">
+    <insert id="insertResume">
+        INSERT INTO T_RESUME(RESUME_ID, RESUME_NAME, RESUME_SEX, RESUME_PHONE, RESUME_EDUCATION, RESUME_SCHOOL, RESUME_MAJOR, RESUME_AGE, RESUME_WORKYEAR, RESUME_INTRO, RESUME_USER_ID, RESUME_DESIGNATION) VALUES (RESUME_ID_SEQ.nextval,#{resume_name},#{resume_sex},#{resume_phone},#{resume_education},#{resume_school},#{resume_major},#{resume_age},#{resume_workyear},#{resume_intro},#{resume_user_id},#{resume_designation})
+    </insert>
+    <update id="updateResume">
+        UPDATE T_RESUME SET resume_name=#{resume_name},resume_sex=#{resume_sex},resume_phone=#{resume_phone},resume_education=#{resume_education},resume_school=#{resume_school},resume_major=#{resume_major},resume_age=#{resume_age},resume_workyear=#{resume_workyear},resume_intro=#{resume_intro},resume_designation=#{resume_designation} where resume_id=#{resume_id}
+</update>
+    <delete id="deleteResume">
+        DELETE FROM T_RESUME WHERE RESUME_ID=#{resume_id}
+    </delete>
+    <select id="queryResumeByResume_id" resultType="Resume">
+        SELECT * FROM T_RESUME WHERE RESUME_ID=#{resume_id}
+    </select>
+    <select id="queryResumeByResume_user_id" resultType="Resume">
+        SELECT * FROM T_RESUME WHERE RESUME_USER_ID=#{resume_user_id}
+    </select>
+</mapper>

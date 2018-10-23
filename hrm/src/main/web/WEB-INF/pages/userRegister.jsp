@@ -45,12 +45,7 @@
             &nbsp&nbsp<input style="height: 22px;width: 190px"type="submit" value="立即注册">
         </form>
         <h4 style=" width: 200px;height: 25px;color: red;text-align: center">
-            <%
-                String str = (String) request.getAttribute("msg");
-                if (str!=null){
-                    out.print(str);
-                }
-            %>
+            ${requestScope.msg}
         </h4>
         <div style="width: 200px;height: 22px;position: relative;left: 60px">
             <a href="toJsp?jspName=userLogin">已注册，去登陆—></a>

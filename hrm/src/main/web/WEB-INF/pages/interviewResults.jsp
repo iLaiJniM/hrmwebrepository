@@ -18,9 +18,9 @@
 <body>
 <div style="margin: auto; height: 100%; width: 80%">
     <div>
-        <a href="toJsp?jspName=../../index"><img src="resources/picture/5.png"></a>&nbsp&nbsp&nbsp
-        <a href="toJsp?jspName=../../index">【首页】</a>&nbsp&nbsp&nbsp
-        <a href="toJsp?jspName=interviewInvitation">【简历中心】</a>&nbsp&nbsp&nbsp
+        <a href="toUserHomePage"><img src="resources/picture/5.png"></a>&nbsp&nbsp&nbsp
+        <a href="toUserHomePage">【首页】</a>&nbsp&nbsp&nbsp
+        <a href="toResumeCenterJspInterceptor?jspName=resumeCenter">【简历中心】</a>&nbsp&nbsp&nbsp
         <a href="toJsp?jspName=interviewResults">【面试邀请】</a>
     </div>
 

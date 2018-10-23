@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 31543
@@ -18,8 +19,8 @@
 <body>
 <div style="margin: auto; height: 100%; width: 80%">
     <div>
-        <a href="toJsp?jspName=../../index"><img src="resources/picture/5.png"></a>&nbsp&nbsp&nbsp
-        <a href="toJsp?jspName=../../index">【首页】</a>&nbsp&nbsp&nbsp
+        <a href="toUserHomePage"><img src="resources/picture/5.png"></a>&nbsp&nbsp&nbsp
+        <a href="toUserHomePage">【首页】</a>&nbsp&nbsp&nbsp
         <a href="toJsp?jspName=interviewInvitation">【面试邀请】</a>&nbsp&nbsp&nbsp
         <a href="toJsp?jspName=interviewResults">【面试结果】</a>
     </div>
@@ -29,30 +30,37 @@
             <a href="toJsp?jspName=resumeCreate">创建简历</a>
         </div>
         <div>
-            <c:if></c:if>
-            <table border="1" cellspacing="0">
-                <tr>
-                    <th>简历名称</th>
-                    <th>编辑简历</th>
-                    <th>删除简历</th>
-                </tr>
-
-                <tr>
-                    <td>我的简历1</td>
-                    <td>
-                        <form action="getUserDetailById">
-                            <input type="hidden" name="id" value="<%=%>">
-                            <input type="submit" value="编辑">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="deleteUserDetailById">
-                            <input type="hidden" name="id" value="<%=%>">
-                            <input type="submit" value="删除">
-                        </form>
-                    </td>
-                </tr>
-            </table>
+            <c:if test="${requestScope.resumeList == null}">
+                <br/><br/><h3><c:out value="您尚未添加简历"></c:out></h3>
+            </c:if>
+            <c:if test="${requestScope.resumeList != null}">
+                <table border="1" cellspacing="0">
+                    <tr>
+                        <th>简历名称</th>
+                        <th>编辑简历</th>
+                        <th>删除简历</th>
+                    </tr>
+                    <c:forEach items="${requestScope.resumeList}" var="i">
+                        <tr>
+                            <td>
+                                    ${i.resume_designation}
+                            </td>
+                            <td>
+                                <form action="queryResumeByResume_id">
+                                    <input type="hidden" name="resume_id" value=${i.resume_id}>
+                                    <input type="submit" value="编辑">
+                                </form>
+                            </td>
+                            <td>
+                                <form action="deleteResumeByResume_id">
+                                    <input type="hidden" name="resume_id" value=${i.resume_id}>
+                                    <input type="submit" value="删除">
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:if>
         </div>
     </div>
 </div>

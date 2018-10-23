@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class UserLoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        if(request.getRequestURI().equals("/toJspInterceptor")) {
+        if(request.getRequestURI().equals("/toJspInterceptor")||request.getRequestURI().equals("/toResumeCenterJspInterceptor")) {
             User loginUser = (User) request.getSession().getAttribute("loginUser");
             if(null==loginUser){
                 request.getRequestDispatcher("WEB-INF/pages/userLogin.jsp").forward(request,response);

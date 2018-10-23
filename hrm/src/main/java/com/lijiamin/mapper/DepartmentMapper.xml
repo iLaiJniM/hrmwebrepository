@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lijiamin.dao.DepartmentDao">
+
+    <insert id="insertDepartment">
+        INSERT INTO T_DEPARTMENT(DEPARTMENT_ID, DEPARTMENT_NAME, DEPARTMENT_CREATETIME) VALUES (DEPARTMENT_ID_SEQ.nextval,#{department_name},#{department_createtime})
+    </insert>
+    <update id="updateDepartment">
+        UPDATE T_DEPARTMENT SET DEPARTMENT_NAME=#{department_name} where department_id=#{department_id}
+    </update>
+    <delete id="deleteDepartment">
+        DELETE FROM T_DEPARTMENT WHERE DEPARTMENT_ID=#{department_id}
+    </delete>
+    <select id="queryDepartmentAll" resultType="Department">
+        SELECT * FROM T_DEPARTMENT
+    </select>
+    <select id="queryDepartment" resultType="Department">
+        SELECT * FROM T_DEPARTMENT
+        <where>
+            <if test="department_id!=null and department_id>0">
+                and department_id=#{department_id}
+            </if>
+            <if test="department_name!=null and department_name!=''">
+                and department_name=#{department_name}
+            </if>
+        </where>
+    </select>
+</mapper>
