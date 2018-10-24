@@ -22,13 +22,14 @@ public class Recruit implements Serializable {
         this.recruit_department_id = recruit_department_id;
     }
 
-    public Recruit(Integer recruit_department_id, String recruit_department_name, Integer recruit_position_id, String recruit_position_name, Integer recruit_salary, String recruit_createtime) {
+    public Recruit(Integer recruit_department_id, String recruit_department_name, Integer recruit_position_id, String recruit_position_name, Integer recruit_salary, String recruit_createtime, Integer recruit_state) {
         this.recruit_department_id = recruit_department_id;
         this.recruit_department_name = recruit_department_name;
         this.recruit_position_id = recruit_position_id;
         this.recruit_position_name = recruit_position_name;
         this.recruit_salary = recruit_salary;
         this.recruit_createtime = recruit_createtime;
+        this.recruit_state = recruit_state;
     }
 
     public Integer getRecruit_id() {
@@ -87,6 +88,13 @@ public class Recruit implements Serializable {
         this.recruit_createtime = recruit_createtime;
     }
 
+    public Integer getRecruit_state() {
+        return recruit_state;
+    }
+
+    public void setRecruit_state(Integer recruit_state) {
+        this.recruit_state = recruit_state;
+    }
     @Override
     public String toString() {
         return "Recruit{" +
@@ -97,6 +105,7 @@ public class Recruit implements Serializable {
                 ", recruit_position_name='" + recruit_position_name + '\'' +
                 ", recruit_salary=" + recruit_salary +
                 ", recruit_createtime='" + recruit_createtime + '\'' +
+                ", recruit_state=" + recruit_state +
                 '}';
     }
 }

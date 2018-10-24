@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -77,8 +78,9 @@ public class AdminController {
             model.addAttribute("msg", "名称不能为空");
             return "departmentCreate";
         }
-        Date currentDate=new Date();
-        String date=currentDate.toString();//获取当前时间的字符串类型
+        Date day=new Date();        //获取时间
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm");  //格式
+        String date = sf.format(day);   //转格式
         Department department = new Department(department_name,date);
         if(departmentService.insertDepartment(department)){
             model.addAttribute("msg", "添加成功");
@@ -146,8 +148,9 @@ public class AdminController {
             model.addAttribute("msg", "该部门已存在此职位");
             return "positionCreate";
         }
-        Date currentDate=new Date();
-        String date=currentDate.toString();//获取当前时间的字符串类型
+        Date day=new Date();        //获取时间
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm");  //格式
+        String date = sf.format(day);   //转格式
         Position position = new Position(position_name,date,department_id);
         if(positionService.insertPosition(position)){
             model.addAttribute("msg", "添加成功");
@@ -214,9 +217,45 @@ public class AdminController {
     }
 
     @RequestMapping("/rectuitQueryPosition")
-    public String rectuitQueryPosition(Department department,Model model)throws Exception{
-        Department department1 = departmentService.queryDepartment(department);
-        model.addAttribute("department",department1);
-        return "departmentUpdate";
+    public String rectuitQueryPosition(Integer department_id,String department_name, Model model)throws Exception {
+        List<Position> positionList = positionService.queryPositionByPosition_department_id(department_id);
+        model.addAttribute("positionList",positionList);
+        model.addAttribute("department_id",department_id);
+        model.addAttribute("department_name",department_name);
+        return "rectuitQueryPosition";
     }
+
+    @RequestMapping("/rectuitSetSalary")
+    public String rectuitSetSalary(Integer recruit_department_id,String recruit_department_name,Integer recruit_position_id,String recruit_position_name,Model model)throws Exception {
+        model.addAttribute("recruit_department_id",recruit_department_id);
+        model.addAttribute("recruit_department_name",recruit_department_name);
+        model.addAttribute("recruit_position_id",recruit_position_id);
+        model.addAttribute("recruit_position_name",recruit_position_name);
+        return "rectuitSetSalary";
+    }
+
+    @RequestMapping("/insertRecruit")
+    public String insertRecruit(Recruit recruit,Integer recruit_salary,Model model)throws Exception {
+        Date day=new Date();        //获取时间
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm");  //格式
+        String date = sf.format(day);   //转格式
+        recruit.setRecruit_createtime(date);
+        recruit.setRecruit_state(0);    //未发布
+        System.out.println(recruit);
+        if(recruitService.insertRecruit(recruit)){
+            model.addAttribute("msg","添加成功");
+        }else {
+            model.addAttribute("msg","添加失败");
+        }
+        return "rectuitSetSalary";
+    }
+
+    @RequestMapping("/unpublishedRecruit")
+    public String unpublishedRecruit(Model model)throws Exception{
+        List<Recruit> recruitList = recruitService.queryRecruitByRecruit_state(0);
+        model.addAttribute("recruitList",recruitList);
+        return "recruitUnpublished";
+    }
+
+
 }
