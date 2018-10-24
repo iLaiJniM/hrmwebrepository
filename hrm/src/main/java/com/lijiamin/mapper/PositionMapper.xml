@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lijiamin.dao.PositionDao">
+    <insert id="insertPosition">
+        INSERT INTO T_POSITION(POSITION_ID, POSITION_NAME, POSITION_CREATETIME, POSITION_DEPARTMENT_ID) VALUES (POSITION_ID_SEQ.nextval,#{position_name},#{position_createtime},#{position_department_id})
+    </insert>
+    <update id="updatePosition">
+        UPDATE T_POSITION SET POSITION_NAME=#{position_name} where position_id=#{position_id}
+    </update>
+    <delete id="deletePosition">
+        DELETE FROM T_POSITION WHERE POSITION_ID=#{position_id}
+    </delete>
+    <select id="queryPosition" resultType="com.lijiamin.model.Position">
+        SELECT * FROM T_POSITION
+        <where>
+            <if test="position_id!=null and position_id>0">
+                and position_id=#{position_id}
+            </if>
+            <if test="position_name!=null and position_name!=''">
+                and position_name=#{position_name}
+            </if>
+            <if test="position_department_id!=null and position_department_id>0">
+                and position_department_id=#{position_department_id}
+            </if>
+        </where>
+    </select>
+    <select id="queryPositionAll" resultType="com.lijiamin.model.Position">
+        SELECT * FROM T_POSITION
+    </select>
+    <select id="queryPositionByPosition_department_id" resultType="com.lijiamin.model.Position">
+        SELECT * FROM T_POSITION WHERE POSITION_DEPARTMENT_ID=#{position_department_id}
+    </select>
+
+</mapper>

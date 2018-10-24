@@ -1,7 +1,9 @@
 package com.lijiamin.controller;
 
+import com.lijiamin.model.Recruit;
 import com.lijiamin.model.Resume;
 import com.lijiamin.model.User;
+import com.lijiamin.service.RecruitService;
 import com.lijiamin.service.ResumeService;
 import com.lijiamin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private ResumeService resumeService;
+    @Autowired
+    private RecruitService recruitService;
 
     @RequestMapping("/toJsp")
     public String toJsp(String jspName)throws Exception{
@@ -51,7 +55,7 @@ public class UserController {
                 cookie.setMaxAge(60*60*24*7);
                 response.addCookie(cookie);
             }
-            return toUserHomePage();
+            return toUserHomePage(session);
         }else {
             model.addAttribute("msg1","µÇÂ½Ê§°Ü");
             return "userLogin";
@@ -84,13 +88,13 @@ public class UserController {
                 session.setAttribute("loginUser",user);
             }
         }
-        return toUserHomePage();
+        return toUserHomePage(session);
     }
 
     @RequestMapping("/exitLoginUser")
-    public String exitLoginUser(HttpSession session, HttpServletRequest request)throws Exception {
+    public String exitLoginUser(HttpSession session)throws Exception {
         session.setAttribute("loginUser",null);
-        return toUserHomePage();
+        return toUserHomePage(session);
     }
 
     @RequestMapping("/ajaRegisterName")
@@ -148,10 +152,9 @@ public class UserController {
     }
 
     @RequestMapping("/toUserHomePage")
-    public String toUserHomePage()throws Exception{
-        /*
-        ´ýÌí¼Ó
-        */
+    public String toUserHomePage(HttpSession session)throws Exception{
+        List<Recruit> recruitList = recruitService.queryRecruitByRecruit_state(1);
+        session.setAttribute("recruitList",recruitList);
         return "userHomePage";
     }
 

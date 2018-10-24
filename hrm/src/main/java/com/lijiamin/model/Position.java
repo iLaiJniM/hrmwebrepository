@@ -22,6 +22,11 @@ public class Position implements Serializable {
         this.position_name = position_name;
     }
 
+    public Position(String position_name, Integer position_department_id) {
+        this.position_name = position_name;
+        this.position_department_id = position_department_id;
+    }
+
     public Position(String position_name, String position_createtime, Integer position_department_id) {
         this.position_name = position_name;
         this.position_createtime = position_createtime;

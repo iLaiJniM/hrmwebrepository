@@ -1,13 +1,16 @@
 package com.lijiamin.controller;
 
 import com.lijiamin.model.Department;
+import com.lijiamin.model.Position;
+import com.lijiamin.model.Recruit;
 import com.lijiamin.service.DepartmentService;
+import com.lijiamin.service.PositionService;
+import com.lijiamin.service.RecruitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -20,6 +23,10 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private PositionService positionService;
+    @Autowired
+    private RecruitService recruitService;
 
     @RequestMapping("/adminLogin")
     public String userLogin(String loginAdmin_name, String loginAdmin_pass, HttpSession session, HttpServletResponse response, Model model)throws Exception{
@@ -57,11 +64,6 @@ public class AdminController {
     @RequestMapping("/toAdminHomePage")
     public String toAdminHomePage()throws Exception{
         return "adminHomePage";
-    }
-
-    @RequestMapping("/toRecruitCenterJsp")
-    public String toRecruitCenterJsp()throws Exception{
-        return "recruitCenter";
     }
 
     @RequestMapping("/toTrainCenterJsp")
@@ -110,7 +112,111 @@ public class AdminController {
 
     @RequestMapping("/deleteDepartment")
     public String deleteDepartment(Integer department_id,Model model)throws Exception{
+        /*
+        * 删除前看是否有员工
+        *
+        *
+        * */
         departmentService.deleteDepartment(department_id);
         return toDepartmentCenterJsp(model);
+    }
+
+    @RequestMapping("/queryPosition")
+    public String queryPosition(Integer department_id, Model model)throws Exception {
+        List<Position> positionList = positionService.queryPositionByPosition_department_id(department_id);
+        model.addAttribute("positionList",positionList);
+        model.addAttribute("department_id",department_id);
+        return "positionQuery";
+    }
+
+    @RequestMapping("/positionCreate")
+    public String positionCreate(Integer department_id, Model model)throws Exception {
+        model.addAttribute("department_id",department_id);
+        return "positionCreate";
+    }
+
+    @RequestMapping("/insertPosition")
+    public String insertPosition(Integer department_id,String position_name, Model model)throws Exception{
+        model.addAttribute("department_id",department_id);
+        if (position_name == "") {
+            model.addAttribute("msg", "名称不能为空");
+            return "positionCreate";
+        }
+        if(null != positionService.queryPosition(new Position(position_name,department_id))){
+            model.addAttribute("msg", "该部门已存在此职位");
+            return "positionCreate";
+        }
+        Date currentDate=new Date();
+        String date=currentDate.toString();//获取当前时间的字符串类型
+        Position position = new Position(position_name,date,department_id);
+        if(positionService.insertPosition(position)){
+            model.addAttribute("msg", "添加成功");
+        }else {
+            model.addAttribute("msg","添加失败");
+        }
+        return "positionCreate";
+    }
+
+    @RequestMapping("/deletePosition")
+    public String deletePosition(Integer department_id,Integer position_id,Model model)throws Exception{
+        model.addAttribute("department_id",department_id);
+        /*
+        * 删除前看是否有员工
+        *
+        *
+        * */
+        positionService.deletePosition(position_id);
+        return queryPosition(department_id,model);
+    }
+
+    @RequestMapping("/toUpdatePosition")
+    public String toUpdatePosition(Integer position_id,Integer department_id,Model model)throws Exception{
+        Position position = positionService.queryPosition(new Position(position_id));
+        model.addAttribute("position",position);
+        model.addAttribute("department_id",department_id);
+        return "positionUpdate";
+    }
+
+    @RequestMapping("/updatePosition")
+    public String updatePosition(Integer department_id,Integer position_id,String position_name, Model model)throws Exception{
+        model.addAttribute("department_id",department_id);
+        if(null == position_name || position_name=="") {
+            model.addAttribute("msg", "名称不能为空");
+            return "positionUpdate";
+        }
+        if(null != positionService.queryPosition(new Position(position_name,department_id))){
+            model.addAttribute("msg", "该部门已存在此职位");
+            return "positionUpdate";
+        }
+        Position position1 = new Position(position_name);
+        position1.setPosition_id(position_id);
+        model.addAttribute("position",position1);
+        if(positionService.updatePosition(position1)){
+            model.addAttribute("msg", "保存成功");
+        }else {
+            model.addAttribute("msg","保存失败");
+        }
+        return "positionUpdate";
+    }
+
+    @RequestMapping("/toRecruitCenterJsp")
+    public String toRecruitCenterJsp(Model model)throws Exception{
+        List<Recruit> recruitList = recruitService.queryRecruitByRecruit_state(1);
+        model.addAttribute("recruitList",recruitList);
+        return "recruitCenter";
+    }
+
+    @RequestMapping("/recruitCreate")
+    public String recruitCreate( Model model)throws Exception {
+        List<Department> departmentList = departmentService.queryDepartmentAll();
+        model.addAttribute("departmentList",departmentList);
+        return "recruitCreate";
+    }
+
+    @RequestMapping("/rectuitQueryPosition")
+    public String rectuitQueryPosition(Department department,Model model)throws Exception{
+        Department department1 = departmentService.queryDepartment(department);
+        model.addAttribute("department",department1);
+        return "departmentUpdate";
     }
 }
