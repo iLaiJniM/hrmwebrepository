@@ -25,9 +25,6 @@
         <a href="toRecruitCenterJsp">【招聘中心】</a>&nbsp&nbsp&nbsp
         <a href="toTrainCenterJsp">【培训中心】</a>
     </div><br/><br/><br/>
-    <div>
-        信息<br/>
-    </div>
 </div>
 </body>
 </html>

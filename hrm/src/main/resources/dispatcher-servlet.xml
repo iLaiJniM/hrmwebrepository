@@ -34,7 +34,7 @@
         <!--游客未登录时，点击功能选项跳转至登陆页面-->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean class="com.lijiamin.controller.UserLoginInterceptor"/>
+            <bean class="com.lijiamin.interceptor.UserLoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>

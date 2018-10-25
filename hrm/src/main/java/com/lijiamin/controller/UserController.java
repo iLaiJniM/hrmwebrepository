@@ -27,8 +27,6 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private ResumeService resumeService;
-    @Autowired
     private RecruitService recruitService;
 
     @RequestMapping("/toJsp")
@@ -114,55 +112,10 @@ public class UserController {
         }
     }
 
-    @RequestMapping("/toResumeCenterJspInterceptor")
-    public String toResumeCenterJspInterceptor(String jspName,HttpSession session,Model model)throws Exception{
-        User user = (User) session.getAttribute("loginUser");
-        List<Resume> resumeList = resumeService.queryResumeByResume_user_id(user.getUser_id());
-        model.addAttribute("resumeList",resumeList);
-        return jspName;
-    }
-
-    @RequestMapping("/insertResume")
-    public String insertResume(Resume resume,HttpSession session, Model model)throws Exception{
-        User user = (User) session.getAttribute("loginUser");
-        resume.setResume_user_id(user.getUser_id());
-        if(resumeService.insertResume(resume)){
-            model.addAttribute("msg", "保存成功");
-        }else {
-            model.addAttribute("msg","保存失败");
-        }
-        return "resumeCreate";
-    }
-
-    @RequestMapping("/queryResumeByResume_id")
-    public String queryResumeByResume_id(Integer resume_id,Model model)throws Exception{
-        Resume resume = resumeService.queryResumeByResume_id(resume_id);
-        model.addAttribute("resume",resume);
-        return "resumeUpdate";
-    }
-
-    @RequestMapping("/updateResume")
-    public String updateResume(Resume resume, Model model)throws Exception{
-        if(resumeService.updateResume(resume)){
-            model.addAttribute("msg", "保存成功");
-        }else {
-            model.addAttribute("msg","保存失败");
-        }
-        return "resumeUpdate";
-    }
-
     @RequestMapping("/toUserHomePage")
     public String toUserHomePage(HttpSession session)throws Exception{
         List<Recruit> recruitList = recruitService.queryRecruitByRecruit_state(1);
         session.setAttribute("recruitList",recruitList);
         return "userHomePage";
     }
-
-    @RequestMapping("/deleteResumeByResume_id")
-    public String deleteResumeByResume_id(Integer resume_id,Model model,HttpSession session)throws Exception{
-        resumeService.deleteResume(new Resume(resume_id));
-        String jspName = "resumeCenter";
-        return toResumeCenterJspInterceptor(jspName, session, model);
-    }
-
 }

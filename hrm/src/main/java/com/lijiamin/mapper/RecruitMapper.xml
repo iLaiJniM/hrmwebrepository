@@ -7,7 +7,7 @@
         VALUES (RECRUIT_ID_SEQ.nextval,#{recruit_department_id},#{recruit_department_name},#{recruit_position_id},#{recruit_position_name},#{recruit_salary},#{recruit_createtime},#{recruit_state})
     </insert>
     <update id="updateRecruit">
-        UPDATE T_RECRUIT SET RECRUIT_STATE=#{recruit_state}
+        UPDATE T_RECRUIT SET RECRUIT_SALARY=#{recruit_salary},recruit_createtime=#{recruit_createtime},RECRUIT_STATE=#{recruit_state} where recruit_id=#{recruit_id}
     </update>
     <delete id="deleteRecruit">
         DELETE FROM T_RECRUIT WHERE RECRUIT_ID=#{recruit_id}

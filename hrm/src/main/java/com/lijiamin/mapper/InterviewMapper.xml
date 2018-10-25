@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lijiamin.dao.InterviewDao">
+    <insert id="insertInterview">
+        INSERT INTO T_INTERVIEW(INTERVIEW_ID, INTERVIEW_TIME, INTERVIEW_PLACE, INTERVIEW_USER_ID) VALUES(INTERVIEW_ID_SEQ.nextval,#{interview_time},#{interview_place},#{interview_user_id})
+    </insert>
+    <update id="updateInterview">
+        UPDATE T_INTERVIEW SET INTERVIEW_STATE=#{interview_state} where interview_id=#{interview_id}
+    </update>
+    <delete id="deleteInterview">
+        DELETE FROM T_INTERVIEW WHERE INTERVIEW_ID=#{interview_id}
+    </delete>
+    <select id="queryInterviewByInterview_id" resultType="com.lijiamin.model.Interview">
+        SELECT * FROM T_INTERVIEW WHERE INTERVIEW_ID=#{interview_id}
+    </select>
+    <select id="queryInterviewByInterview_user_id" resultType="com.lijiamin.model.Interview">
+        SELECT * FROM T_INTERVIEW WHERE INTERVIEW_USER_ID=#{interview_user_id}
+    </select>
+    <select id="queryInterviewByInterview_state" resultType="com.lijiamin.model.Interview">
+        SELECT * FROM T_INTERVIEW WHERE INTERVIEW_STATE=#{interview_state}
+    </select>
+</mapper>

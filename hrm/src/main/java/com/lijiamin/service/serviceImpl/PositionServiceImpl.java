@@ -54,7 +54,7 @@ public class PositionServiceImpl implements PositionService {
     }
 
     public List<Position> queryPositionByPosition_department_id(Integer position_department_id) {
-        if(null != position_department_id) {
+        if(null != position_department_id && position_department_id > 0) {
             List<Position> positionList = positionDao.queryPositionByPosition_department_id(position_department_id);
             if (positionList.size() > 0) {
                 return positionList;

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lijiamin.dao.DeliveryDao">
-    <insert id="insertDelivery"></insert>
-    <update id="updateDelivery"></update>
-    <delete id="deleteDelivery"></delete>
-    <select id="queryDelivery" resultType="com.lijiamin.model.Delivery"></select>
-    <select id="queryDeliveryAll" resultType="com.lijiamin.model.Delivery"></select>
-</mapper>

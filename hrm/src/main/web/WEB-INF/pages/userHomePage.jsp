@@ -43,7 +43,7 @@
                         <th>招聘职位</th>
                         <th>招聘薪资</th>
                         <th>创建时间</th>
-                        <th>投递简历</th>
+                        <th>立即申请</th>
                     </tr>
                     <c:forEach items="${sessionScope.recruitList}" var="i">
                         <tr>
@@ -52,9 +52,9 @@
                             <td>${i.recruit_salary}</td>
                             <td>${i.recruit_createtime}</td>
                             <td>
-                                <form action="handInResume">
+                                <form action="selectResume">
                                     <input type="hidden" name="recruit_id" value=${i.recruit_id}>
-                                    <input type="submit" value="投递">
+                                    <input type="submit" value="申请">
                                 </form>
                             </td>
                         </tr>

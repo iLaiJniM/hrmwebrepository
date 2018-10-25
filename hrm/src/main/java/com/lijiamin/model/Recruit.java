@@ -12,7 +12,7 @@ public class Recruit implements Serializable {
     private Integer recruit_position_id;    //招聘职位id
     private String recruit_position_name;   //招聘职位名
     private Integer recruit_salary; //招聘薪水
-    private String recruit_createtime;  //招聘生成时间
+    private String recruit_createtime;  //招聘发布时间
     private Integer recruit_state; //招聘发布状态
 
     public Recruit() {

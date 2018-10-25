@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lijiamin.dao.DeliveryDao">
+    <insert id="insertDelivery">
+        INSERT into T_DELIVERY(DELIVERY_ID, DELIVERY_RECRUIT_ID, DELIVERY_RESUME_ID, DELIVERY_STATE, DELIVERY_USER_ID, DELIVERY_RESUME_NAME)
+        VALUES(DELIVERY_ID_SEQ.nextval,#{delivery_recruit_id},#{delivery_resume_id},#{delivery_state},#{delivery_user_id},#{delivery_resume_name})
+    </insert>
+    <update id="updateDelivery">
+        UPDATE T_DELIVERY SET DELIVERY_STATE=#{delivery_state} where delivery_id=#{delivery_id}
+    </update>
+    <delete id="deleteDelivery">
+        DELETE FROM T_DELIVERY WHERE DELIVERY_ID=#{delivery_id}
+    </delete>
+    <select id="queryDelivery" resultType="com.lijiamin.model.Delivery">
+        SELECT * FROM T_DELIVERY WHERE DELIVERY_ID=#{delivery_id}
+    </select>
+    <select id="queryDeliveryByDelivery_recruit_id" resultType="com.lijiamin.model.Delivery">
+        SELECT * FROM T_DELIVERY WHERE DELIVERY_RECRUIT_ID=#{delivery_recruit_id}
+    </select>
+</mapper>
