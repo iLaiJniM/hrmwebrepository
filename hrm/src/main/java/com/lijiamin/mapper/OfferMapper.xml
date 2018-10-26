@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lijiamin.dao.OfferDao">
+    <insert id="insertOffer">
+        INSERT INTO T_OFFER(OFFER_ID, OFFER_RESUME_NAME, OFFER_DEPART_NAME, OFFER_POSITION_NAME, OFFER_USER_ID)
+        VALUES(OFFER_ID_SEQ.nextval,#{offer_resume_name},#{offer_depart_name},#{offer_position_name},#{offer_user_id})
+    </insert>
+    <select id="queryOfferByOffer_id" resultType="com.lijiamin.model.Offer">
+        SELECT * FROM T_OFFER WHERE OFFER_ID=#{offer_id}
+    </select>
+    <select id="queryOfferByOffer_user_id" resultType="com.lijiamin.model.Offer">
+        SELECT * FROM T_OFFER WHERE OFFER_USER_ID=#{offer_user_id}
+    </select>
+</mapper>

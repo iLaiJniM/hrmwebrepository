@@ -23,7 +23,6 @@
         <a href="toAdminHomePage">【首页】</a>&nbsp&nbsp&nbsp
         <a href="toRecruitCenterJsp">【招聘中心】</a>&nbsp&nbsp&nbsp
     </div><br/><br/>
-
     <div style="margin: auto; height: 100%; width: 80%;background-color: aquamarine">
         <div>
             <span style="font-size: 30px">未发布招聘</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp

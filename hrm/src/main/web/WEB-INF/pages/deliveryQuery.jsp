@@ -62,6 +62,9 @@
                             <td>
                                 <form action="interviewCreate">
                                     <input type="hidden" name="interview_user_id" value="${i.delivery_user_id}">
+                                    <input type="hidden" name="interview_resume_id" value="${i.delivery_resume_id}">
+                                    <input type="hidden" name="delivery_recruit_id" value="${i.delivery_recruit_id}">
+                                    <input type="hidden" name="interview_resume_name" value="${i.delivery_resume_name}">
                                     <input type="submit" value="邀请面试">
                                 </form>
                             </td>

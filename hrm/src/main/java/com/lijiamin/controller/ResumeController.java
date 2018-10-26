@@ -4,6 +4,7 @@ import com.lijiamin.model.Delivery;
 import com.lijiamin.model.Resume;
 import com.lijiamin.model.User;
 import com.lijiamin.service.DeliveryService;
+import com.lijiamin.service.InterviewService;
 import com.lijiamin.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

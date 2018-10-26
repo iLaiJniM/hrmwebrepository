@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lijiamin.dao.InterviewDao">
     <insert id="insertInterview">
-        INSERT INTO T_INTERVIEW(INTERVIEW_ID, INTERVIEW_TIME, INTERVIEW_PLACE, INTERVIEW_USER_ID) VALUES(INTERVIEW_ID_SEQ.nextval,#{interview_time},#{interview_place},#{interview_user_id})
+        INSERT INTO T_INTERVIEW(INTERVIEW_ID, INTERVIEW_TIME, INTERVIEW_PLACE, INTERVIEW_USER_ID, INTERVIEW_STATE, INTERVIEW_RESUME_ID, INTERVIEW_DATE,INTERVIEW_RECRUIT_ID,INTERVIEW_RECRUIT_DEPARTNAME,INTERVIEW_RECRUIT_POSITIONNAME,INTERVIEW_RESUME_NAME)
+        VALUES(INTERVIEW_ID_SEQ.nextval,#{interview_time},#{interview_place},#{interview_user_id},#{interview_state},#{interview_resume_id},#{interview_date},#{interview_recruit_id},#{interview_recruit_departname},#{interview_recruit_positionname},#{interview_resume_name})
     </insert>
     <update id="updateInterview">
         UPDATE T_INTERVIEW SET INTERVIEW_STATE=#{interview_state} where interview_id=#{interview_id}

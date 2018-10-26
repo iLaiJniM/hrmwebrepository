@@ -2,8 +2,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 31543
-  Date: 2018/10/19
-  Time: 21:28
+  Date: 2018/10/25
+  Time: 16:18
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,25 +14,23 @@
 <html>
 <head>
     <base href="<%=basePath%>"/>
-    <title>面试邀请</title>
+    <title>录用</title>
 </head>
 <body>
-<div style="margin: auto; height: 100%; width: 80%">
+<div style="margin: auto; width: 60%">
     <div>
-        <a href="toUserHomePage"><img src="resources/picture/5.png"></a>&nbsp&nbsp&nbsp
-        <a href="toUserHomePage">【首页】</a>&nbsp&nbsp&nbsp
-        <a href="toResumeCenterJspInterceptor?jspName=resumeCenter">【简历中心】</a>&nbsp&nbsp&nbsp
-        <a href="toJsp?jspName=interviewResults">【面试结果】</a>
+        <a href="toAdminHomePage"><img src="resources/picture/5.png"></a>&nbsp&nbsp&nbsp
+        <a href="toAdminHomePage">【首页】</a>&nbsp&nbsp&nbsp
+        <a href="toRecruitCenterJsp">【招聘中心】</a>&nbsp&nbsp&nbsp
     </div><br/><br/>
+
     <div style="margin: auto; width: 90%;background-color: aquamarine">
-        <h1>面 试 邀 请</h1>
+        <h1>选 择 录 用</h1>
         <c:if test="${requestScope.interviewList == null}">
             <br/><br/><h3><c:out value="暂无面试通知"></c:out></h3>
         </c:if>
         <c:if test="${requestScope.interviewList != null}">
             <c:forEach items="${requestScope.interviewList}" var="i">
-                <form action="confirmInterview">
-                    <input type="hidden" name="interview_id" value="${i.interview_id}">
                     <table width="800" border="1" align="center" cellpadding="10" cellspacing="0">
                         <tr>
                             <td>
@@ -55,22 +53,30 @@
                                 地 点 ：${i.interview_place}
                             </td>
                             <td>
-                                状 态 ：
-                                <c:if test="${i.interview_state == 0}">
-                                    <span style="color: red">${"未确认"}</span>
-                                </c:if>
-                                <c:if test="${i.interview_state == 1}">
-                                    <span style="color: dodgerblue">${"已确认"}</span>
-                                </c:if>
+                                姓 名 ：${i.interview_resume_name}
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" bgcolor="#9FCDEA" align="center">
-                                <input style="height: 32px;width: 190px;background-color: pink" type="submit" value="确认面试">
+                            <td bgcolor="#9FCDEA" align="center">
+                                <form action="employUser" method="post">
+                                    <input type="hidden" name="interview_id" value="${i.interview_id}">
+                                    <input type="hidden" name="offer_resume_name" value="${i.interview_resume_name}">
+                                    <input type="hidden" name="offer_depart_name" value="${i.interview_recruit_departname}">
+                                    <input type="hidden" name="offer_position_name" value="${i.interview_recruit_positionname}">
+                                    <input type="hidden" name="offer_user_id" value="${i.interview_user_id}">
+                                    <input type="hidden" name="interview_resume_id" value="${i.interview_resume_id}">
+                                    <input type="hidden" name="interview_recruit_id" value="${i.interview_recruit_id}">
+                                    <input style="height: 32px;width: 190px;background-color: pink" type="submit" value="录用">
+                                </form>
+                            </td>
+                            <td bgcolor="#9FCDEA" align="center">
+                                <form action="deleteInterview" method="post">
+                                    <input type="hidden" name="interview_id" value="${i.interview_id}">
+                                    <input style="height: 32px;width: 190px;background-color: red" type="submit" value="pass">
+                                </form>
                             </td>
                         </tr>
-                    </table>
-                </form><br/><br/>
+                    </table><br/>
             </c:forEach>
         </c:if><br/>
     </div>

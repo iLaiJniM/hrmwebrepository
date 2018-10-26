@@ -25,15 +25,10 @@
         //  1：js中获取Date中的month时，会比当前月份少一个月，所以这里需要先加一
         //  2: 判断当前月份是否小于10，如果小于，那么就在月份的前面加一个 '0' ， 如果大于，就显示当前月份
         var month = date_now.getMonth()+1 < 10 ? "0"+(date_now.getMonth()+1) : (date_now.getMonth()+1);   //得到当前月份
-        var date = date_now.getDate() < 10 ? "0"+date_now.getDate() : date_now.getDate();  //得到当前日子（多少号）
-
-
-        var date = date_now.getDate();
-
-        $("#interview").attr("min",year+"-"+month+"-"+date); //设置input标签的max属性
+        var date = date_now.getDate()+1 < 10 ? "0"+date_now.getDate()+1 : date_now.getDate()+1;  //得到当前日子（多少号）
+        $("#day").attr("min",year+"-"+month+"-"+date); //设置input标签的max属性
     })
 </script>
-
 <body>
 <div style="margin: auto; width: 60%">
     <div>
@@ -41,9 +36,15 @@
         <a href="toAdminHomePage">【首页】</a>&nbsp&nbsp&nbsp
         <a href="toRecruitCenterJsp">【招聘中心】</a>&nbsp&nbsp&nbsp
     </div><br/><br/>
+
     <div style="margin: auto; width: 90%;background-color: aquamarine">
-        <form action="updateResume" method="post">
-            <input type="hidden" name="resume_id" value=${requestScope.resume.resume_id}>
+        <form action="insertInterview" method="post">
+            <input type="hidden" name="interview_user_id" value=${requestScope.interview_user_id}>
+            <input type="hidden" name="interview_resume_id" value=${requestScope.interview_resume_id}>
+            <input type="hidden" name="interview_recruit_id" value=${requestScope.delivery_recruit_id}>
+            <input type="hidden" name="interview_recruit_departname" value=${requestScope.recruit_department_name}>
+            <input type="hidden" name="interview_recruit_positionname" value=${requestScope.recruit_position_name}>
+            <input type="hidden" name="interview_resume_name" value=${requestScope.interview_resume_name}>
             <table width="800" border="1" align="center" cellpadding="10" cellspacing="0">
                 <caption><h1>面 试 邀 请</h1></caption>
                 <tr>
@@ -51,7 +52,12 @@
                 </tr>
                 <tr>
                     <td>
-                        时 间 ：<input id="interview" type="date" value min="${d}"><input type="time">
+                        日 期 ：<input id="day" type="date" name="interview_date" value min="${d}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        时 间 ：<input type="time" name="interview_time" value max="17:40" min="08:30">
                     </td>
                 </tr>
                 <tr>

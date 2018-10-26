@@ -21,7 +21,7 @@
     <div>
         <a href="toUserHomePage"><img src="resources/picture/5.png"></a>&nbsp&nbsp&nbsp
         <a href="toUserHomePage">【首页】</a>&nbsp&nbsp&nbsp
-        <a href="toJsp?jspName=interviewInvitation">【面试邀请】</a>&nbsp&nbsp&nbsp
+        <a href="toInterviewInvitationJspInterceptor">【面试邀请】</a>&nbsp&nbsp&nbsp
         <a href="toJsp?jspName=interviewResults">【面试结果】</a>
     </div>
     <div style="margin: auto; height: 100%; width: 80%">
