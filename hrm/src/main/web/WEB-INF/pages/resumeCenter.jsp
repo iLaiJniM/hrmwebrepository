@@ -17,14 +17,14 @@
     <title>简历中心</title>
 </head>
 <body>
-<div style="margin: auto; height: 100%; width: 80%">
+<div style="margin: auto; height: 100%; width: 50%">
     <div>
         <a href="toUserHomePage"><img src="resources/picture/5.png"></a>&nbsp&nbsp&nbsp
         <a href="toUserHomePage">【首页】</a>&nbsp&nbsp&nbsp
         <a href="toInterviewInvitationJspInterceptor">【面试邀请】</a>&nbsp&nbsp&nbsp
-        <a href="toJsp?jspName=interviewResults">【面试结果】</a>
-    </div>
-    <div style="margin: auto; height: 100%; width: 80%">
+        <a href="toJspInterceptor">【面试结果】</a>
+    </div><br/><br/>
+    <div style="margin: auto; height: 100%; width: 50%">
         <div>
             <span style="font-size: 30px">简历中心</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
             <a href="toJsp?jspName=resumeCreate">创建简历</a>

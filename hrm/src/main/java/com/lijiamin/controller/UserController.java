@@ -34,11 +34,6 @@ public class UserController {
         return jspName;
     }
 
-    @RequestMapping("/toJspInterceptor")
-    public String toJspInterceptor(String jspName)throws Exception{
-        return jspName;
-    }
-
     @RequestMapping("/userLogin")
     public String userLogin(String loginUser_name, String loginUser_pass,String log, HttpSession session, HttpServletResponse response, Model model)throws Exception{
         if(loginUser_name == null || loginUser_name =="" || loginUser_pass == null || loginUser_pass == ""){

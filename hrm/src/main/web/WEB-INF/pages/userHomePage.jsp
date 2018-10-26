@@ -28,7 +28,7 @@
     <div>
         <a href="toResumeCenterJspInterceptor?jspName=resumeCenter">【简历中心】</a>&nbsp&nbsp&nbsp
         <a href="toInterviewInvitationJspInterceptor">【面试邀请】</a>&nbsp&nbsp&nbsp
-        <a href="toJspInterceptor?jspName=interviewResults">【面试结果】</a>
+        <a href="toJspInterceptor">【面试结果】</a>
     </div><br/><br/><br/>
     <div style="margin: auto; height: 100%; width: 80%; background-color: aqua">
         <h1>招 聘 信 息</h1>

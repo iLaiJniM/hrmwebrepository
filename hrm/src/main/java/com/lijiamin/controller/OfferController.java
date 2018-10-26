@@ -43,4 +43,11 @@ public class OfferController {
         model.addAttribute("interviewList",interviewList);
         return "employ";
     }
+
+    @RequestMapping("/toJspInterceptor")
+    public String toJspInterceptor(HttpSession session,Model model)throws Exception{
+        List<Offer> offerList = offerService.queryOfferByOffer_user_id(((User) session.getAttribute("loginUser")).getUser_id());
+        model.addAttribute("offerList",offerList);
+        return "interviewResults";
+    }
 }

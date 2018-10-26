@@ -22,7 +22,7 @@
         <a href="toUserHomePage"><img src="resources/picture/5.png"></a>&nbsp&nbsp&nbsp
         <a href="toUserHomePage">【首页】</a>&nbsp&nbsp&nbsp
         <a href="toResumeCenterJspInterceptor?jspName=resumeCenter">【简历中心】</a>&nbsp&nbsp&nbsp
-        <a href="toJsp?jspName=interviewResults">【面试结果】</a>
+        <a href="toJspInterceptor">【面试结果】</a>
     </div><br/><br/>
     <div style="margin: auto; width: 90%;background-color: aquamarine">
         <h1>面 试 邀 请</h1>
