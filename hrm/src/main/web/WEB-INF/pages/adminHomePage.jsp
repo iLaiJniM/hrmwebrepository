@@ -21,9 +21,10 @@
     <a href="exitLoginAdmin">【退出登录】</a>
     <br/><br/><br/>
     <div>
-        <a href="toDepartmentCenterJsp">【部门中心】</a>&nbsp&nbsp&nbsp
-        <a href="toRecruitCenterJsp">【招聘中心】</a>&nbsp&nbsp&nbsp
-        <a href="toTrainCenterJsp">【培训中心】</a>
+        <a href="toDepartmentCenterJsp">【部门职位管理】</a>&nbsp&nbsp&nbsp
+        <a href="toDepartmentCenterJsp">【员工管理】</a>&nbsp&nbsp&nbsp
+        <a href="toRecruitCenterJsp">【招聘管理】</a>&nbsp&nbsp&nbsp
+        <a href="toTrainCenterJsp">【培训管理】</a>
     </div><br/><br/><br/>
 </div>
 </body>
